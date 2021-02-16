@@ -1,0 +1,227 @@
+<html>
+	<head>
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+		<style>
+			body {
+				margin: 0;
+				padding: 0;
+
+				font-family: 'Poppins', sans-serif;
+			}
+			.header {
+				width: 100%;
+				background: #fafbfc;
+				border-bottom: 1px dotted #01bee6;
+			}
+
+			.header td {
+				text-align: center;
+				padding: 20px;
+			}
+
+			#logo {
+				text-decoration: none;
+			}
+
+			#logo img {
+				height: 28px;
+			}
+
+			h1 {
+				text-align: center;
+				font-size: 24px;
+				margin-bottom: 0;
+			}
+
+			input { display: none; }
+
+			@keyframes flyingRight {
+				from { left: -200px;}
+				to { left: 1200px; }
+			}
+
+			@keyframes flyingLeft {
+				from { right: -200px;}
+				to { right: 1200px; }
+			}
+
+			@keyframes fallingBird {
+				from { margin-top: 0px}
+				to { margin-top: 800px; }
+			}
+
+			#game-canvas {
+				cursor: crosshair;
+				caret-color: red;
+
+				background: #abcdef;
+
+				position: relative;
+
+				width: 800px;
+				height: 492px;
+
+				margin: auto;
+
+				overflow: hidden;
+
+				background: url('./assets/background.gif');
+
+				margin-top: 20px;
+			}
+
+			#win-wrapper {
+				display: none;
+
+				width: 300px;
+
+				margin: 200px auto;
+
+				text-align: center;
+
+				background: #efefef;
+			}
+
+			#win {
+				font-size: 32px;
+				color: red;
+			}
+
+			.bird {
+				position: absolute;
+				display: block;
+				cursor: crosshair;
+			}
+
+			.bird img {
+				width: 100%;
+				height: 100%;
+			}
+
+			.falling {
+				display: none;
+			}
+
+			label {
+				width: 100%;
+				height: 100%;
+
+				display: block;
+			}
+
+			#bird-1 {
+				top: 0;
+
+				width: 60px;
+				height: 60px;
+
+				animation: flyingRight 12s infinite;
+			}
+
+			#bird-2 {
+				top: 100px;
+
+				width: 100px;
+				height: 100px;
+
+				animation: flyingRight 8s infinite;
+			}
+
+			#bird-3 {
+				top: 50px;
+
+				width: 80px;
+				height: 80px;
+
+				animation: flyingLeft 10s infinite;
+			}
+
+			#bird-4 {
+				top: 100px;
+
+				width: 120px;
+				height: 120px;
+
+				animation: flyingLeft 7s infinite;
+			}
+
+			#bird-chk-1:checked ~ #game-canvas #bird-1 .flying { display: none; }
+			#bird-chk-1:checked ~ #game-canvas #bird-1 .falling { display: block; animation: ease-in fallingBird 1s forwards; }
+
+			#bird-chk-2:checked ~ #game-canvas #bird-2 .flying { display: none; }
+			#bird-chk-2:checked ~ #game-canvas #bird-2 .falling { display: block; animation: ease-in fallingBird 1s forwards; }
+
+			#bird-chk-3:checked ~ #game-canvas #bird-3 .flying { display: none; }
+			#bird-chk-3:checked ~ #game-canvas #bird-3 .falling { display: block; animation: ease-in fallingBird 1s forwards; }
+
+			#bird-chk-4:checked ~ #game-canvas #bird-4 .flying { display: none; }
+			#bird-chk-4:checked ~ #game-canvas #bird-4 .falling { display: block; animation: ease-in fallingBird 1s forwards; }
+
+			#bird-chk-1:checked ~ #bird-chk-2:checked ~ #bird-chk-3:checked ~ #bird-chk-4:checked ~ #game-canvas #win-wrapper {
+				display: block;
+			}
+		</style>
+	</head>
+	<body>
+		<table class="header">
+			<tr>
+				<td>
+					<h1>Mailhuhn</h1>
+					<div>by</div>
+					<a id="logo" href="https://chamaileon.io"><img src="https://edmdesigner.github.io/moorhuhn-clone-in-email-poc/assets/logo.png" /></a>
+					<p>A CSS-only proof-of-concept game inspired by Moorhuhn that works in email</p>
+					<a href="https://github.com/EDMdesigner/moorhuhn-clone-in-email-poc">View on Github</a>
+				</td>
+			</tr>
+		</table>
+
+		<input id="bird-chk-1" name="bird-1" type="checkbox" />
+		<input id="bird-chk-2" name="bird-2" type="checkbox" />
+		<input id="bird-chk-3" name="bird-3" type="checkbox" />
+		<input id="bird-chk-4" name="bird-4" type="checkbox" />
+
+		<div id="game-canvas">
+			<div id="bird-1" class="bird">
+				<label for="bird-chk-1" class="flying">
+					<img src="https://edmdesigner.github.io/moorhuhn-clone-in-email-poc/assets/bird-b-right.gif" />
+				</label>
+				<div class="falling">
+					<img src="https://edmdesigner.github.io/moorhuhn-clone-in-email-poc/assets/bird-b-right.gif" />
+				</div>
+			</div>
+
+			<div id="bird-2" class="bird">
+				<label for="bird-chk-2" class="flying">
+					<img src="https://edmdesigner.github.io/moorhuhn-clone-in-email-poc/assets/bird-b-right.gif" />
+				</label>
+				<div class="falling">
+					<img src="https://edmdesigner.github.io/moorhuhn-clone-in-email-poc/assets/bird-b-right.gif" />
+				</div>
+			</div>
+
+			<div id="bird-3" class="bird">
+				<label for="bird-chk-3" class="flying">
+					<img src="https://edmdesigner.github.io/moorhuhn-clone-in-email-poc/assets/bird-b-left.gif" />
+				</label>
+				<div class="falling">
+					<img src="https://edmdesigner.github.io/moorhuhn-clone-in-email-poc/assets/bird-b-left.gif" />
+				</div>
+			</div>
+
+			<div id="bird-4" class="bird">
+				<label for="bird-chk-4" class="flying">
+					<img src="https://edmdesigner.github.io/moorhuhn-clone-in-email-poc/assets/bird-b-left.gif" />
+				</label>
+				<div class="falling">
+					<img src="https://edmdesigner.github.io/moorhuhn-clone-in-email-poc/assets/bird-b-left.gif" />
+				</div>
+			</div>
+
+			<div id="win-wrapper">
+				<div id="win">You Won!</div>
+				<div id="why">Do not kill birds in real life.</div>
+			</div>
+		</div>
+	</body>
+</html>
